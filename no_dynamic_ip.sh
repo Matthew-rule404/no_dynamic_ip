@@ -9,6 +9,11 @@
 #   -D, --debug [x]       Enable debug mode. Use 'x' for line debug mode.
 #   -S, --silent          Enable silent mode. No confirmation and no console output.
 #   -DRY, --dry-run       Enable dry-run mode. No changes will be made.
+#
+# Version :              0.30.09
+# Date of Create:        2024/08/04
+# Date of Lastmodified:  2024/09/22
+# Author:                Masato Nadayoshi
 # =====================================================================================
 
 # Exit immediately if a command exits with a non-zero status
@@ -194,43 +199,43 @@ get_message() {
         'JP')
             case "$key" in
                 'usage')
-                    echo "�g�p�@: $0 [-D|--debug [x]] [-S|--silent] [-DRY|--dry-run]"
+                    echo "使用法: $0 [-D|--debug [x]] [-S|--silent] [-DRY|--dry-run]"
                     ;;
                 'debug_on')
-                    echo "�f�o�b�O���[�h���L���ł��B"
+                    echo "デバッグモードが有効です。"
                     ;;
                 'line_debug_on')
-                    echo "���C���f�o�b�O���[�h���L���ł��B"
+                    echo "ラインデバッグモードが有効です。"
                     ;;
                 'dry_run_on')
-                    echo "DRY-RUN���[�h���L���ł��B�ύX�͍s���܂���B"
+                    echo "DRY-RUNモードが有効です。変更は行われません。"
                     ;;
                 'run_as_root')
-                    echo "root�Ƃ��Ď��s���Ă��������B"
+                    echo "rootとして実行してください。"
                     ;;
                 'cmd_not_installed')
-                    echo "�G���[: $2 ���C���X�g�[������Ă��܂���B$2 ���C���X�g�[�����Ă��������B"
+                    echo "エラー: $2 がインストールされていません。$2 をインストールしてください。"
                     ;;
                 'processing_yaml')
-                    echo "YAML�t�@�C����������: $2"
+                    echo "YAMLファイルを処理中: $2"
                     ;;
                 'display_yaml')
-                    echo "$2 �̓��e��\��:"
+                    echo "$2 の内容を表示:"
                     ;;
                 'error_read_yaml')
-                    echo "�G���[: $2 ��ǂݎ��܂���ł����B"
+                    echo "エラー: $2 を読み取れませんでした。"
                     ;;
                 'extracted_static')
-                    echo "YAML���璊�o���ꂽ�ÓIIP�ƃQ�[�g�E�F�C:"
+                    echo "YAMLから抽出された静的IPとゲートウェイ:"
                     ;;
                 'device')
-                    echo "�f�o�C�X: $2"
+                    echo "デバイス: $2"
                     ;;
                 'static_ipv4')
-                    echo -n "  �ÓIIPv4: "
+                    echo -n "  静的IPv4: "
                     ;;
                 'static_ipv6')
-                    echo -n "  �ÓIIPv6: "
+                    echo -n "  静的IPv6: "
                     ;;
                 'gateway4')
                     echo -n "  Gateway4: "
@@ -239,110 +244,110 @@ get_message() {
                     echo -n "  Gateway6: "
                     ;;
                 'none')
-                    echo "�Ȃ�"
+                    echo "なし"
                     ;;
                 'no_static_ips')
-                    echo "netplan YAML�ݒ�t�@�C���ɗL���ȐÓIIP�A�h���X��������܂���ł����B"
+                    echo "netplan YAML設定ファイルに有効な静的IPアドレスが見つかりませんでした。"
                     ;;
                 'dynamic_ips_to_delete')
-                    echo "�ȉ��̓��IIP�A�h���X���폜����܂�:"
+                    echo "以下の動的IPアドレスが削除されます:"
                     ;;
                 'ipv4_routes_via')
-                    echo "  - $2 �o�R��IPv4���[�g:"
+                    echo "  - $2 経由のIPv4ルート:"
                     ;;
                 'ipv6_routes_via')
-                    echo "  - $2 �o�R��IPv6���[�g:"
+                    echo "  - $2 経由のIPv6ルート:"
                     ;;
                 'ipv6_link_local')
-                    echo "      - $2 (�����N���[�J���A�h���X���g�p���Ă��܂��B�폜����܂���B)"
+                    echo "      - $2 (リンクローカルアドレスを使用しています。削除されません。)"
                     ;;
                 'routes_to_be_added')
-                    echo "�폜��ɍĒǉ�����郋�[�g:"
+                    echo "削除後に再追加されるルート:"
                     ;;
                 'no_routes_to_add')
-                    echo "�폜��ɍĒǉ�����郋�[�g�͂���܂���B"
+                    echo "削除後に再追加されるルートはありません。"
                     ;;
                 'no_dynamic_ips')
-                    echo "�폜�Ώۂ̓��IIP�A�h���X��������܂���ł����B"
+                    echo "削除対象の動的IPアドレスが見つかりませんでした。"
                     ;;
                 'confirm_prompt')
-                    echo -n "���IIP�A�h���X���폜���Ă���낵���ł����H (y/N): "
+                    echo -n "動的IPアドレスを削除してもよろしいですか？ (y/N): "
                     ;;
                 'operation_cancelled')
-                    echo "���[�U�[�ɂ���đ��삪�L�����Z������܂����B"
+                    echo "ユーザーによって操作がキャンセルされました。"
                     ;;
                 'deleted_dynamic_ipv4')
-                    echo "���IIPv4�A�h���X: $2 �� $3 ����폜���܂����B"
+                    echo "動的IPv4アドレス: $2 を $3 から削除しました。"
                     ;;
                 'deleted_dynamic_ipv6')
-                    echo "���IIPv6�A�h���X: $2 �� $3 ����폜���܂����B"
+                    echo "動的IPv6アドレス: $2 を $3 から削除しました。"
                     ;;
                 'dry_run_deleted_dynamic_ipv4')
-                    echo "[DRY-RUN] ���IIPv4�A�h���X: $2 �� $3 ����폜���܂��B"
+                    echo "[DRY-RUN] 動的IPv4アドレス: $2 を $3 から削除します。"
                     ;;
                 'dry_run_deleted_dynamic_ipv6')
-                    echo "[DRY-RUN] ���IIPv6�A�h���X: $2 �� $3 ����폜���܂��B"
+                    echo "[DRY-RUN] 動的IPv6アドレス: $2 を $3 から削除します。"
                     ;;
                 'dry_run_no_deletion')
-                    echo "[DRY-RUN] $2 �̓��IIP�A�h���X�͎��ۂɂ͍폜����܂���ł����B"
+                    echo "[DRY-RUN] $2 の動的IPアドレスは実際には削除されませんでした。"
                     ;;
                 'dynamic_removed')
-                    echo "���IIP�A�h���X�� $2 ����폜����܂����B"
+                    echo "動的IPアドレスが $2 から削除されました。"
                     ;;
                 'default_route_removed')
-                    echo "�x��: �f�t�H���g���[�g '$2' ���폜����܂����B"
+                    echo "警告: デフォルトルート '$2' が削除されました。"
                     ;;
                 'readded_default_route_ipv4')
-                    echo "�f�t�H���g���[�g���Ēǉ����܂���: default via $2 dev $3"
+                    echo "デフォルトルートを再追加しました: default via $2 dev $3"
                     ;;
                 'dry_run_readded_default_route_ipv4')
-                    echo "[DRY-RUN] �f�t�H���g���[�g���Ēǉ����܂�: default via $2 dev $3"
+                    echo "[DRY-RUN] デフォルトルートを再追加します: default via $2 dev $3"
                     ;;
                 'readded_default_route_ipv6')
-                    echo "IPv6�f�t�H���g���[�g���Ēǉ����܂���: default via $2 dev $3"
+                    echo "IPv6デフォルトルートを再追加しました: default via $2 dev $3"
                     ;;
                 'dry_run_readded_default_route_ipv6')
-                    echo "[DRY-RUN] IPv6�f�t�H���g���[�g���Ēǉ����܂�: default via $2 dev $3"
+                    echo "[DRY-RUN] IPv6デフォルトルートを再追加します: default via $2 dev $3"
                     ;;
                 'route_not_readded_ipv6_link_local')
-                    echo "  - �����N���[�J���A�h���X���g�p���Ă��邽�߁A�Ēǉ��͕s�v�ł��B"
+                    echo "  - リンクローカルアドレスを使用しているため、再追加は不要です。"
                     ;;
                 'warning_no_static_gateway_ipv4')
-                    echo "�x��: �f�o�C�X '$2' �ɑ΂���ÓI�Q�[�g�E�F�C��񂪂���܂���B�f�t�H���g���[�g���Ēǉ��ł��܂���B"
+                    echo "警告: デバイス '$2' に対する静的ゲートウェイ情報がありません。デフォルトルートを再追加できません。"
                     ;;
                 'warning_no_static_ipv4_subnet')
-                    echo "�x��: '$2' �Ɠ����T�u�l�b�g���ɐÓIIPv4�A�h���X��������܂���B�f�t�H���g���[�g���Ēǉ��ł��܂���B"
+                    echo "警告: '$2' と同じサブネット内に静的IPv4アドレスが見つかりません。デフォルトルートを再追加できません。"
                     ;;
                 'warning_no_static_gateway_ipv6')
-                    echo "�x��: �f�o�C�X '$2' �ɑ΂���ÓIIPv6�Q�[�g�E�F�C��񂪂���܂���BIPv6�f�t�H���g���[�g���Ēǉ��ł��܂���B"
+                    echo "警告: デバイス '$2' に対する静的IPv6ゲートウェイ情報がありません。IPv6デフォルトルートを再追加できません。"
                     ;;
                 'newly_added_routes')
                     echo "--------------------------------------"
-                    echo "�폜��ɍĒǉ����ꂽ���[�g:"
+                    echo "削除後に再追加されたルート:"
                     ;;
                 'route_entry')
                     echo "  - $2"
                     ;;
                 'debug_off')
-                    echo "�f�o�b�O���[�h�������ł��B"
+                    echo "デバッグモードが無効です。"
                     ;;
                 'line_debug_off')
-                    echo "���C���f�o�b�O���[�h�������ł��B"
+                    echo "ラインデバッグモードが無効です。"
                     ;;
                 'managing_interface')
-                    echo "�C���^�[�t�F�[�X $2 ��IP�A�h���X���Ǘ����Ă��܂��B"
+                    echo "インターフェース $2 のIPアドレスを管理しています。"
                     ;;
                 'current_ipv4_addresses')
-                    echo "�C���^�[�t�F�[�X $2 �̌��݂�IPv4�A�h���X:"
+                    echo "インターフェース $2 の現在のIPv4アドレス:"
                     ;;
                 'current_ipv6_addresses')
-                    echo "�C���^�[�t�F�[�X $2 �̌��݂�IPv6�A�h���X:"
+                    echo "インターフェース $2 の現在のIPv6アドレス:"
                     ;;
                 'invalid_input')
-                    echo "�͂� (y) �܂��� ������ (n) �œ����Ă��������B"
+                    echo "はい (y) または いいえ (n) で答えてください。"
                     ;;
                 *)
-                    echo "�s���ȃ��b�Z�[�W�L�[: $1"
+                    echo "不明なメッセージキー: $1"
                     ;;
             esac
             ;;
